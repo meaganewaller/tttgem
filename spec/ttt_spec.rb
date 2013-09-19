@@ -149,6 +149,40 @@ describe TTT do
     end
   end
 
+  context "#minimax" do
+    it "determines a win for x" do
+      TTT.new(%w(x x x
+                 - - -
+                 - - -)).minimax.should == 100
+    end
+
+    it "determines a win for o" do
+      TTT.new(%w(o o o
+                 - - -
+                 - - -)).minimax.should == -100
+    end
+
+    it "determines a tie" do
+      TTT.new(%w(x o x
+                 o x o
+                 o x o)).minimax.should == 0
+    end
+
+     it "determines a win for x in one move" do
+      ttt = TTT.new(%w(x x -
+                       - - -
+                       - - -), 'x')
+      ttt.minimax.should == 100 + (ttt.count_empty_spaces)
+    end
+
+    it "determines a win for o in one move" do
+      ttt = TTT.new(%w(o o -
+                       - - -
+                       - - -), 'o')
+      ttt.minimax.should == -100 - (ttt.count_empty_spaces)
+    end 
+  end
+
   context "#possible_values" do
     it "returns the value of the space for x" do
       ttt = TTT.new(%w(x x -

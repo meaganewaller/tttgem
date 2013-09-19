@@ -40,7 +40,22 @@ class TTT
   end
 
   def possible_values
-    possible_moves.map { |move| move.ai.minimax }
+    possible_moves.map { |move| move.minimax }
+  end
+
+  def minimax
+    return 100 if winning_player?(PLAYER_ONE)
+    return -100 if winning_player?(PLAYER_TWO)
+    return 0 if !winning_player?(PLAYER_ONE) &&
+                !winning_player?(PLAYER_TWO) &&
+                count_empty_spaces == 0
+    return possible_values.max + count_empty_spaces if @turn == PLAYER_ONE 
+    return possible_values.min - count_empty_spaces if @turn == PLAYER_TWO 
+  end
+
+  def best_move
+    return available_spaces.max_by { |space| new_move(space).minimax } if @turn == PLAYER_ONE
+    return available_spaces.min_by { |space| new_move(space).minimax } if @turn == PLAYER_TWO 
   end
 
   def winning_player?(turn)

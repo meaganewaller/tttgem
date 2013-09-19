@@ -115,31 +115,25 @@ describe TTT do
     end
   end
 
-  context "#count_empty_spaces" do
-    it "has number of empty spaces" do
-      TTT.new.count_empty_spaces.should == 9
-    end
-  end
-
   context "#new_move" do
     it "creates a deep copy of the board and the turn" do
       ttt = TTT.new
       new_ttt = TTT.new(%w(- x -
                            - - -
                            - - -), 'o')
-      ttt.new_move(1).board.should == new_ttt.board
-      ttt.new_move(2).turn.should == new_ttt.turn
+      ttt.new_board_with_move(1).board.should == new_ttt.board
+      ttt.new_board_with_move(2).turn.should == new_ttt.turn
       ttt.board.should_not == new_ttt.board
       ttt.turn.should_not == new_ttt.turn
     end
   end
 
-  context "#possible_moves" do
+  context "#possible_boards" do
     it "returns all the possible moves for a given position" do
       ttt = TTT.new(%w(x x -
                        o o x
                        - o x), 'x')
-      boards = ttt.possible_moves.map(&:board)
+      boards = ttt.possible_boards.map(&:board)
       boards.should include(%w(x x x
                                o o x
                                - o x))
@@ -172,14 +166,14 @@ describe TTT do
       ttt = TTT.new(%w(x x -
                        - - -
                        - - -), 'x')
-      ttt.minimax.should == 100 + (ttt.count_empty_spaces)
+      ttt.minimax.should == 100 + (ttt.available_spaces.count)
     end
 
     it "determines a win for o in one move" do
       ttt = TTT.new(%w(o o -
                        - - -
                        - - -), 'o')
-      ttt.minimax.should == -100 - (ttt.count_empty_spaces)
+      ttt.minimax.should == -100 - (ttt.available_spaces.count)
     end 
   end
 

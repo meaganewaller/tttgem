@@ -2,16 +2,16 @@ class TTT
   PLAYER_ONE = 'x'
   PLAYER_TWO = 'o'
   
-  attr_accessor :board, :turn
+  attr_accessor :board, :current_player
 
-  def initialize(board = Array.new(9) {"-"}, turn = PLAYER_ONE)
+  def initialize(board = Array.new(9) {"-"}, current_player = PLAYER_ONE)
     @board = board
-    @turn = turn
+    @current_player = current_player 
   end
 
   def make_move(space)
-    @board[space] = @turn
-    @turn = @turn == PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE
+    @board[space] = @current_player
+    @current_player = @current_player == PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE
   end
   
   def available_spaces
@@ -19,15 +19,15 @@ class TTT
   end
 
   def new_board_with_move(space)
-    board_with_turn = deep_copy
-    board_with_turn.make_move(space)
-    board_with_turn
+    board_with_current_player = deep_copy
+    board_with_current_player.make_move(space)
+    board_with_current_player
   end
 
   def deep_copy
     copy = dup
     copy.board = board.dup
-    copy.turn = turn.dup
+    copy.current_player = current_player.dup
     copy
   end
 
@@ -40,16 +40,16 @@ class TTT
   end
 
   def best_move
-    return available_spaces.max_by { |space| new_board_with_move(space).minimax } if @turn == PLAYER_ONE
-    return available_spaces.min_by { |space| new_board_with_move(space).minimax } if @turn == PLAYER_TWO 
+    return available_spaces.max_by { |space| new_board_with_move(space).minimax } if @current_player == PLAYER_ONE
+    return available_spaces.min_by { |space| new_board_with_move(space).minimax } if @current_player == PLAYER_TWO 
   end
 
   def minimax
     return 100 if x_won 
     return -100 if o_won 
     return 0 if tie
-    return possible_values.max + available_spaces.count if @turn == PLAYER_ONE 
-    return possible_values.min - available_spaces.count if @turn == PLAYER_TWO 
+    return possible_values.max + available_spaces.count if @current_player == PLAYER_ONE 
+    return possible_values.min - available_spaces.count if @current_player == PLAYER_TWO 
   end
 
   def x_won
@@ -66,15 +66,15 @@ class TTT
     available_spaces.count == 0
   end
 
-  def winning_player?(turn)
-    return true if @board[0..2]                      == [turn] * 3
-    return true if @board[3..5]                      == [turn] * 3
-    return true if @board[6..8]                      == [turn] * 3
-    return true if [@board[0], @board[3], @board[6]] == [turn] * 3
-    return true if [@board[1], @board[4], @board[7]] == [turn] * 3
-    return true if [@board[2], @board[5], @board[8]] == [turn] * 3
-    return true if [@board[0], @board[4], @board[8]] == [turn] * 3
-    return true if [@board[2], @board[4], @board[6]] == [turn] * 3
+  def winning_player?(current_player)
+    return true if @board[0..2]                      == [current_player] * 3
+    return true if @board[3..5]                      == [current_player] * 3
+    return true if @board[6..8]                      == [current_player] * 3
+    return true if [@board[0], @board[3], @board[6]] == [current_player] * 3
+    return true if [@board[1], @board[4], @board[7]] == [current_player] * 3
+    return true if [@board[2], @board[5], @board[8]] == [current_player] * 3
+    return true if [@board[0], @board[4], @board[8]] == [current_player] * 3
+    return true if [@board[2], @board[4], @board[6]] == [current_player] * 3
   end
 end
 

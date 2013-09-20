@@ -32,8 +32,6 @@ class Game
   end
 
   def over? 
-    return true if @ttt.winning_player?('x') || 
-                   @ttt.winning_player?('o') ||
-                   @ttt.available_spaces == []
+    return true if @ttt.x_won || @ttt.o_won || @ttt.tie
   end
 end

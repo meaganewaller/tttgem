@@ -1,12 +1,12 @@
 require 'ttt'
 describe TTT do
   context "#new" do
-    it "has a board and a turn" do
+    it "has a board and a current_player" do
       ttt = TTT.new
       ttt.board.should == %w(- - -
                              - - -
                              - - -)
-      ttt.turn.should == 'x'
+      ttt.current_player.should == 'x'
     end
 
     it "can create a board and a turn from input" do
@@ -16,7 +16,7 @@ describe TTT do
       ttt.board.should == %w(x o x
                              - - -
                              - - -)
-      ttt.turn.should == 'o'
+      ttt.current_player.should == 'o'
     end
   end
 
@@ -31,9 +31,9 @@ describe TTT do
 
     it "switches player after making a move" do
       ttt = TTT.new
-      ttt.turn.should == 'x'
+      ttt.current_player.should == 'x'
       ttt.make_move(3)
-      ttt.turn.should == 'o'
+      ttt.current_player.should == 'o'
     end
   end
 
@@ -122,9 +122,9 @@ describe TTT do
                            - - -
                            - - -), 'o')
       ttt.new_board_with_move(1).board.should == new_ttt.board
-      ttt.new_board_with_move(2).turn.should == new_ttt.turn
+      ttt.new_board_with_move(2).current_player.should == new_ttt.current_player
       ttt.board.should_not == new_ttt.board
-      ttt.turn.should_not == new_ttt.turn
+      ttt.current_player.should_not == new_ttt.current_player
     end
   end
 

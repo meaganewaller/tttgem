@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'mock_ui'
-
 describe TicTacToe::Game do
   let(:ui) { MockUI.new }
   let(:settings) {{:player_one => :human, :player_two => :ai }}

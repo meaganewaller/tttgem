@@ -1,4 +1,4 @@
-require 'ai/ai_factory'
+require 'spec_helper'
 
 describe TicTacToe::AIRules::Factory do
   it "makes an unbeatable AI move" do

@@ -1,6 +1,4 @@
-require 'ai/unbeatable_ai'
-require 'board'
-
+require 'spec_helper'
 describe TicTacToe::AIRules::UnbeatableAI do
   let(:board) { TicTacToe::Board.new }
   let(:mark) { 'O' }

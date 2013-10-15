@@ -1,5 +1,3 @@
-require 'human'
-
 module TicTacToe
   class PlayerFactory
     def self.create(input)

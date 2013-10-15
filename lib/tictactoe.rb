@@ -1,0 +1,7 @@
+require 'game'
+require 'player_factory'
+require 'board'
+require 'human'
+require 'ai'
+require 'ai/unbeatable_ai'
+require 'ai/ai_factory'

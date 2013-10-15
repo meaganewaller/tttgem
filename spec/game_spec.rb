@@ -1,4 +1,4 @@
-require 'game'
+require 'spec_helper'
 require 'mock_ui'
 
 describe TicTacToe::Game do

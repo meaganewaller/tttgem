@@ -1,4 +1,4 @@
-require 'board'
+require 'spec_helper'
 
 describe TicTacToe::Board do
   let(:board) {  described_class.new }

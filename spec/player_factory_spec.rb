@@ -1,5 +1,4 @@
-require 'player_factory'
-require 'human'
+require 'spec_helper'
 
 def unbeatable_ai
   TicTacToe::AIRules::UnbeatableAI

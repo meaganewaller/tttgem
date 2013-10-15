@@ -1,5 +1,4 @@
-require 'ai'
-require 'board'
+require 'spec_helper'
 
 describe TicTacToe::AI do
   let(:ai) { described_class.new("O") }

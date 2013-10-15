@@ -1,4 +1,4 @@
-require 'human'
+require 'spec_helper'
 
 describe TicTacToe::Human do
   let(:human) { human = described_class.new('X')}

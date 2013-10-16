@@ -30,15 +30,16 @@ module TicTacToe
         if max_player
           board.empty_spaces.each do |spaces|
             board.place_move(mark, spaces)
-            score_min = [score_min, minimax(board, opponent_mark, depth + 1, score_max, score_min, !(max_player), -color)].max
+            score_min = [score_min, minimax(board, opponent_mark, depth + 1, score_min, score_max, !(max_player), -color)].max
             board.undo_move(spaces)
             break if score_min >= score_max
           end
           return score_min
         else
+
           board.empty_spaces.each do |spaces|
             board.place_move(mark, spaces)
-            score_max = [score_max, minimax(board, opponent_mark, depth + 1, score_max, score_min, !(max_player), -color)].min
+            score_max = [score_max, minimax(board, opponent_mark, depth + 1, score_min, score_max, !(max_player), -color)].min
             board.undo_move(spaces)
             break if score_min >= score_max
           end

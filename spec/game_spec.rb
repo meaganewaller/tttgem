@@ -221,7 +221,7 @@ describe TicTacToe::Game do
       config[:player_two] = :ai
       config[:game_board] = "12X456789"
       new_game = described_class.play_game(ui, config)
-      new_game.board.to_s.should == "O2X456789"
+      new_game.board.to_s.should == "12X4O6789"
     end
   end
 

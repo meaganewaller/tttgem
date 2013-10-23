@@ -1,17 +1,18 @@
 module TicTacToe
   module AIRules
     class UnbeatableAI
-      Infinity = 100
-      Negative_Infinity = -100
+      MAX_SCORE = 100
+      MIN_SCORE = -100
+      TIED_SCORE = 0
 
       def self.make_move(board, mark)
-        best_score = Negative_Infinity
+        best_score = MIN_SCORE
         best_space = 0
         opponent_mark = mark == "X" ? "O" : "X"
 
         board.empty_spaces.each do |space|
           board.place_move(mark, space)
-          score = minimax(board, opponent_mark, 0, Negative_Infinity, Infinity, false, -1)
+          score = minimax(board, opponent_mark, 0, MIN_SCORE, MAX_SCORE, false, -1)
           board.undo_move(space)
 
           if score > best_score
@@ -48,9 +49,9 @@ module TicTacToe
       end
 
       def self.check_game_state(board, mark, depth)
-        return 0 if board.tied_game?
-        return 100 + depth if board.winner == mark
-        -100 + depth
+        return TIED_SCORE if board.tied_game?
+        return MAX_SCORE + depth if board.winner == mark
+        MIN_SCORE + depth
       end
 
       def self.game_done?(board, depth)

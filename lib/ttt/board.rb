@@ -27,7 +27,7 @@ module TicTacToe
     end
 
     def get(space)
-      @spaces[space-1]
+      @spaces[(space.to_i)-1]
     end
 
     def place_move(piece, *indices)

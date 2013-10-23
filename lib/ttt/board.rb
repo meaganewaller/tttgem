@@ -78,32 +78,10 @@ module TicTacToe
       @spaces.select { |x| x.to_i != 0}
     end
 
-    def row_win
-      (@spaces.map { |space| space.to_i }).each_slice(3) { |nums| @solutions.push(nums)}
-    end
-
-    def column_win
-      3.times do |check|
-        ((check+1)..(9)).step(3).each_slice(3) do |nums|
-          @solutions.push(nums)
-        end
-      end
-    end
-
-    def diagonal_win
-      (1..(9)).step(4).each_slice(3) do |nums|
-        @solutions.push(nums)
-      end
-      ((3)..(9)-1).step(2).each_slice(3) do |nums|
-        @solutions.push(nums)
-      end
-    end
-
     def winning_solutions
-      @solutions = []
-      row_win
-      column_win
-      diagonal_win
+      @solutions = [[1,2,3], [4,5,6], [7,8,9],
+                    [1,4,7], [2,5,8], [3,6,9],
+                    [1,5,9], [3,5,7]]
     end
 
     def winner

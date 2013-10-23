@@ -30,8 +30,8 @@ module TicTacToe
       @spaces[space-1]
     end
 
-    def place_move(piece, *space)
-      space.each do |space|
+    def place_move(piece, *indices)
+      indices.each do |space|
         @spaces[(space.to_i)-1] = piece
       end
     end

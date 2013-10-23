@@ -57,9 +57,9 @@ module TicTacToe
     end
 
     def has_winner?
-      has_winner = false
-      @solutions.each { |sol| has_winner = true if unique?(sol)}
-      has_winner
+      # has_winner = false
+      @solutions.find { |sol| unique?(sol)}
+      # has_winner
     end
 
     def unique?(spaces)

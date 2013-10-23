@@ -64,7 +64,7 @@ module TicTacToe
       spaces.map { |s| @spaces[s-1]}.uniq.length == 1 
     end
 
-    def make_blank
+    def translate_board_to_string 
       @spaces.reduce("") do |blank_spaces, spaces|
         if !spaces.to_i.zero?
           blank_spaces << '_'

@@ -8,18 +8,18 @@ module TicTacToe
     end
 
     def self.parse(board)
-      parsed_board = self.new
-      parse_board = []
-      new_board = board.split('')
-      new_board.each_index do |space|
-        if new_board[space] == '_' || new_board[space].to_i != 0
-          parse_board << (space + 1).to_s
+      new_board_for_translation = self.new
+      translated_board_spaces = []
+      new_spaces_for_translation = board.split('')
+      new_spaces_for_translation.each_index do |index|
+        if new_spaces_for_translation[index] == '_' || new_spaces_for_translation[index].to_i != 0
+          translated_board_spaces << (index + 1).to_s
         else
-          parse_board << new_board[space]
+          translated_board_spaces << new_spaces_for_translation[index]
         end
       end
-      parsed_board.spaces = parse_board
-      parsed_board
+      new_board_for_translation.spaces = translated_board_spaces
+      new_board_for_translation
     end
 
     def to_s

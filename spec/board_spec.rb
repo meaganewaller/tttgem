@@ -46,14 +46,14 @@ describe TicTacToe::Board do
     end
   end
 
-  describe "#is_taken?" do
+  describe "#is_space_taken?" do
     it "is false when the space isn't taken" do
-      board.is_taken?(5).should be_false
+      board.is_space_taken?(5).should be_false
     end
 
     it "is true when the space is taken" do
       board.place_move('X', 6)
-      board.is_taken?(6).should be_true
+      board.is_space_taken?(6).should be_true
     end  
   end
 

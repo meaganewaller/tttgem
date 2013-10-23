@@ -40,7 +40,7 @@ module TicTacToe
       @spaces[(space.to_i)-1] = space.to_s
     end
 
-    def is_taken?(space)
+    def is_space_taken?(space)
       @spaces[(space.to_i) - 1].to_i == 0
     end
 

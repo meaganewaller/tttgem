@@ -71,7 +71,7 @@ module TicTacToe
     end
 
     def valid_move?(space)
-      !@board.is_taken?(space)
+      !@board.is_space_taken?(space)
     end
 
     def ask_move(player)

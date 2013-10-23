@@ -57,10 +57,10 @@ module TicTacToe
     end
 
     def has_winner?
-      @solutions.find { |sol| unique?(sol)}
+      @solutions.find { |sol| is_solution_found?(sol)}
     end
 
-    def unique?(spaces)
+    def is_solution_found?(spaces)
       spaces.map { |s| @spaces[s-1]}.uniq.length == 1 
     end
 
@@ -108,7 +108,7 @@ module TicTacToe
 
     def winner
       winner = ""
-      @solutions.each { |sol| winner = @spaces[sol[0]-1] if unique?(sol)}
+      @solutions.each { |sol| winner = @spaces[sol[0]-1] if is_solution_found?(sol)}
       winner
     end
   end

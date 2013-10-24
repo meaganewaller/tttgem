@@ -72,7 +72,7 @@ module TicTacToe
       new_board_for_translation
     end
 
-    def to_s
+    def translate_board_with_indices
       @spaces.join
     end
 

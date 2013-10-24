@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe TicTacToe::Board do
   let(:board) {  described_class.new }
@@ -140,19 +141,20 @@ describe TicTacToe::Board do
     it "gets a board" do
       board_parsed = '12345XX8O'
       board = described_class.parse(board_parsed)
-      board.to_s.should == board_parsed
+      board.translate_board_with_indices.should == board_parsed
+      # binding.pry
     end
 
     it "gets a blank board" do
       board_parsed = '_________'
       board = described_class.parse(board_parsed)
-      board.to_s.should == "123456789"
+      board.translate_board_with_indices.should == "123456789"
     end
 
     it "gets a board with underscores and some marks" do
       board_parsed = '_X_______'
       board = described_class.parse(board_parsed)
-      board.to_s.should == "1X3456789"
+      board.translate_board_with_indices.should == "1X3456789"
     end
   end
 

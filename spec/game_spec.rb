@@ -175,7 +175,7 @@ describe TicTacToe::Game do
       config[:player_two] = :ai
       config[:game_board] = "O2O45X789"
       game = described_class.play_game(ui, config)
-      game.board.to_s.should == "OOO45X789"
+      game.board.translate_board_with_indices.should == "OOO45X789"
       game.over.should be_true
     end
 
@@ -188,7 +188,7 @@ describe TicTacToe::Game do
     it "doesnt make a move for the human" do
       config[:player_one] = :human
       new_game = described_class.play_game(ui, config, "4")
-      new_game.board.to_s.should == "123X56789"
+      new_game.board.translate_board_with_indices.should == "123X56789"
     end
 
     it "ends game when game is over" do
@@ -199,21 +199,21 @@ describe TicTacToe::Game do
 
     it "makes a move if computer is first and board is empty" do
       new_game = described_class.play_game(ui, config)
-      new_game.board.to_s.should == "X23456789"
-      player = game.current_player(new_game.board.to_s)
+      new_game.board.translate_board_with_indices.should == "X23456789"
+      player = game.current_player(new_game.board.translate_board_with_indices)
       player.should == game.player_two
     end
 
     it "doesnt make a move when game is over" do
       config[:game_board] = "OOO456789"
       new_game = described_class.play_game(ui, config)
-      new_game.board.to_s.should == "OOO456789"
+      new_game.board.translate_board_with_indices.should == "OOO456789"
     end
 
     it "lets human make first move" do
       config[:player_one] = :human
       new_game = described_class.play_game(ui, config, "5")
-      new_game.board.to_s.should == "1234X6789"
+      new_game.board.translate_board_with_indices.should == "1234X6789"
     end
 
     it "makes a move when computer is second turn" do
@@ -221,7 +221,7 @@ describe TicTacToe::Game do
       config[:player_two] = :ai
       config[:game_board] = "12X456789"
       new_game = described_class.play_game(ui, config)
-      new_game.board.to_s.should == "12X4O6789"
+      new_game.board.translate_board_with_indices.should == "12X4O6789"
     end
   end
 

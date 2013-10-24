@@ -62,7 +62,7 @@ module TicTacToe
       translated_board_spaces = []
       new_spaces_for_translation = board_state.split('')
       iterate_over_new_spaces(new_spaces_for_translation, translated_board_spaces)
-      new_board_equals_translated_board_spaces(new_board_for_translation, translated_board_spaces)
+      create_represented_board(new_board_for_translation, translated_board_spaces)
     end
 
     def self.iterate_over_new_spaces(new_spaces, translated)
@@ -75,7 +75,7 @@ module TicTacToe
       end
     end
 
-    def self.new_board_equals_translated_board_spaces(new_board, translated)
+    def self.create_represented_board(new_board, translated)
       new_board.spaces = translated
       new_board
     end

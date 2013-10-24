@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe TicTacToe::Board do
   let(:board) {  described_class.new }
@@ -109,7 +110,7 @@ describe TicTacToe::Board do
       board.winner.should == "X"
     end
 
-    it "knows when O is the winenr" do
+    it "knows when O is the winner" do
       board.place_move('O', 1, 2, 3)
       board.winner.should == "O"
     end

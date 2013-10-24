@@ -16,8 +16,22 @@ module TicTacToe
         end
       end
     end
-
  
+    def place_move(piece, *indices)
+      indices.each do |space|
+        @spaces[(space.to_i)-1] = piece
+      end
+    end
+
+    def undo_move(space)
+      @spaces[(space.to_i)-1] = space.to_s
+    end
+
+    def is_space_taken?(space)
+      @spaces[(space.to_i) - 1].to_i == 0
+    end
+
+
 
     def self.parse(board)
       new_board_for_translation = self.new
@@ -40,20 +54,6 @@ module TicTacToe
 
     def get(space)
       @spaces[(space.to_i)-1]
-    end
-
-    def place_move(piece, *indices)
-      indices.each do |space|
-        @spaces[(space.to_i)-1] = piece
-      end
-    end
-
-    def undo_move(space)
-      @spaces[(space.to_i)-1] = space.to_s
-    end
-
-    def is_space_taken?(space)
-      @spaces[(space.to_i) - 1].to_i == 0
     end
 
     def tied_game?

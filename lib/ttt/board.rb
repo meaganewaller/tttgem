@@ -61,14 +61,18 @@ module TicTacToe
       new_board_for_translation = self.new
       translated_board_spaces = []
       new_spaces_for_translation = board_state.split('')
-      new_spaces_for_translation.each_index do |index|
-        if new_spaces_for_translation[index] == '_' || new_spaces_for_translation[index].to_i != 0
-          translated_board_spaces << (index + 1).to_s
+      iterate_over_new_spaces(new_spaces_for_translation, translated_board_spaces)
+      new_board_equals_translated_board_spaces(new_board_for_translation, translated_board_spaces)
+    end
+
+    def self.iterate_over_new_spaces(new_spaces, translated)
+      new_spaces.each_index do |index|
+        if new_spaces[index] == '_' || new_spaces[index].to_i != 0
+          translated << (index + 1).to_s
         else
-          translated_board_spaces << new_spaces_for_translation[index]
+          translated << new_spaces[index]
         end
       end
-      new_board_equals_translated_board_spaces(new_board_for_translation, translated_board_spaces)
     end
 
     def self.new_board_equals_translated_board_spaces(new_board, translated)

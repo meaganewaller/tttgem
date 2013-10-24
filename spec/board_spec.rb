@@ -13,12 +13,12 @@ describe TicTacToe::Board do
 
   describe "#translate_board_to_string" do
     it "makes the board representation a string" do
-      board.translate_board_to_string.should == '_________'  
+      board.translate_board_state_to_string.should == '_________'  
     end
 
     it "doesn't replace moves with spaces" do
       board.spaces[3] = "X"
-      board.translate_board_to_string.should == '___X_____'
+      board.translate_board_state_to_string.should == '___X_____'
     end
   end
 

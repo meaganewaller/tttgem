@@ -7,6 +7,18 @@ module TicTacToe
       winning_solutions
     end
 
+    def translate_board_state_to_string 
+      @spaces.reduce("") do |blank_spaces, spaces|
+        if !spaces.to_i.zero?
+          blank_spaces << '_'
+        else
+          blank_spaces << spaces
+        end
+      end
+    end
+
+ 
+
     def self.parse(board)
       new_board_for_translation = self.new
       translated_board_spaces = []
@@ -62,16 +74,6 @@ module TicTacToe
 
     def is_solution_found?(spaces)
       spaces.map { |s| @spaces[s-1]}.uniq.length == 1 
-    end
-
-    def translate_board_to_string 
-      @spaces.reduce("") do |blank_spaces, spaces|
-        if !spaces.to_i.zero?
-          blank_spaces << '_'
-        else
-          blank_spaces << spaces
-        end
-      end
     end
 
     def empty_spaces

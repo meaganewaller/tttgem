@@ -38,7 +38,7 @@ module TicTacToe
     def game_config(config)
       @player_one = PlayerFactory.create(:type => config[:player_one].to_sym, :mark => "X")
       @player_two = PlayerFactory.create(:type => config[:player_two].to_sym, :mark => "O")
-      @board = Board.new
+      @board = TicTacToe::Board.new
     end
 
     def start_game
@@ -92,7 +92,7 @@ module TicTacToe
           @ui.print_board(@board) if @player_two.class == Human
           moves[:player_two] = get_move(@player_two)
           place_move(@player_two.mark, moves[:player_two])
-          @ui.print_board(@obard)
+          @ui.print_board(@board)
         end
       end
     end

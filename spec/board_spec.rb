@@ -73,11 +73,11 @@ describe TicTacToe::Board do
     it "returns true if board is full" do
       board.place_move('X', 1, 3, 5, 8)
       board.place_move('O', 2, 4, 6, 7, 9)
-      board.full_board?.should be_true
+      board.all_spaces_taken?.should be_true
     end
 
     it "returns false if board not full" do
-      board.full_board?.should be_false
+      board.all_spaces_taken?.should be_false
     end
   end
 

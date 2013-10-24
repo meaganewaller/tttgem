@@ -32,10 +32,10 @@ module TicTacToe
     end
 
     def tied_game?
-      full_board? && !has_winner?
+      all_spaces_taken? && !has_winner?
     end
 
-    def full_board?
+    def all_spaces_taken?
       (@spaces.count { |x| x == 'X' } + @spaces.count { |x| x == 'O' }) == 9
     end
 

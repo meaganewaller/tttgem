@@ -10,7 +10,5 @@ module TicTacToe
         raise "Invalid Player Type"
       end
     end
-
-
   end
 end

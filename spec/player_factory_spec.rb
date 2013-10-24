@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-def unbeatable_ai
-  TicTacToe::AIRules::UnbeatableAI
-end
-
 describe TicTacToe::PlayerFactory  do
   let(:player_factory) { described_class }
 
@@ -15,7 +11,7 @@ describe TicTacToe::PlayerFactory  do
   end
 
   it "creates a computer player" do
-    input = {type: :ai, mark: :O, opponent_mark: :X, difficulty: unbeatable_ai }
+    input = {type: :ai, mark: :O, opponent_mark: :X}
     player = player_factory.create(input)
     player.should be_an_instance_of(TicTacToe::AI)
     player.mark.should == :O

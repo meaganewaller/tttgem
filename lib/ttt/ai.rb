@@ -1,18 +1,15 @@
 module TicTacToe
   class AI
     attr_reader :mark
-    attr_accessor :difficulty
 
-    def initialize(mark, difficulty = :unbeatable_ai)
+    def initialize(mark)
       @mark = mark
-      @difficulty = difficulty
     end
 
     def make_move(board)
-      move = { :difficulty => @difficulty,
-               :board => board,
+      move = { :board => board,
                :mark => @mark }
-      AIRules::Factory.get(move)
+      AIEngine.make_move(move[:board], move[:mark])
     end
   end
 end

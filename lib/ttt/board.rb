@@ -49,7 +49,7 @@ module TicTacToe
 
     def winner
       winner = ""
-      @solutions.each { |sol| winner = @spaces[sol[0]-1] if is_solution_found?(sol)}
+      @solutions.find { |sol| winner = @spaces[sol[0]-1] if is_solution_found?(sol)}
       winner
     end
 

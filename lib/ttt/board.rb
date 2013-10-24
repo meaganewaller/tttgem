@@ -68,8 +68,12 @@ module TicTacToe
           translated_board_spaces << new_spaces_for_translation[index]
         end
       end
-      new_board_for_translation.spaces = translated_board_spaces
-      new_board_for_translation
+      new_board_equals_translated_board_spaces(new_board_for_translation, translated_board_spaces)
+    end
+
+    def self.new_board_equals_translated_board_spaces(new_board, translated)
+      new_board.spaces = translated
+      new_board
     end
 
     def translate_board_with_indices

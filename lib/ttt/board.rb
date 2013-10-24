@@ -7,7 +7,7 @@ module TicTacToe
       winning_solutions
     end
 
-    def translate_board_state_to_string 
+    def translate_board_state_with_blanks
       @spaces.reduce("") do |blank_spaces, spaces|
         if !spaces.to_i.zero?
           blank_spaces << '_'
@@ -16,7 +16,7 @@ module TicTacToe
         end
       end
     end
- 
+
     def place_move(piece, *indices)
       indices.each do |space|
         @spaces[(space.to_i)-1] = piece
@@ -31,7 +31,31 @@ module TicTacToe
       @spaces[(space.to_i) - 1].to_i == 0
     end
 
+    def tied_game?
+      full_board? && !has_winner?
+    end
 
+    def full_board?
+      (@spaces.count { |x| x == 'X' } + @spaces.count { |x| x == 'O' }) == 9
+    end
+
+    def has_winner?
+      @solutions.find { |sol| is_solution_found?(sol)}
+    end
+
+    def empty_spaces
+      @spaces.select { |x| x.to_i != 0}
+    end
+
+    def winner
+      winner = ""
+      @solutions.each { |sol| winner = @spaces[sol[0]-1] if is_solution_found?(sol)}
+      winner
+    end
+
+    def is_board_empty?
+      !@spaces.include?("X") && !@spaces.include?("O")
+    end
 
     def self.parse(board)
       new_board_for_translation = self.new
@@ -56,28 +80,8 @@ module TicTacToe
       @spaces[(space.to_i)-1]
     end
 
-    def tied_game?
-      full_board? && !has_winner?
-    end
-
-    def full_board?
-      (@spaces.count { |x| x == 'X' } + @spaces.count { |x| x == 'O' }) == 9
-    end
-
-    def is_board_empty?
-      !@spaces.include?("X") && !@spaces.include?("O")
-    end
-
-    def has_winner?
-      @solutions.find { |sol| is_solution_found?(sol)}
-    end
-
     def is_solution_found?(spaces)
       spaces.map { |s| @spaces[s-1]}.uniq.length == 1 
-    end
-
-    def empty_spaces
-      @spaces.select { |x| x.to_i != 0}
     end
 
     def winning_solutions
@@ -86,10 +90,5 @@ module TicTacToe
                     [1,5,9], [3,5,7]]
     end
 
-    def winner
-      winner = ""
-      @solutions.each { |sol| winner = @spaces[sol[0]-1] if is_solution_found?(sol)}
-      winner
-    end
   end
 end

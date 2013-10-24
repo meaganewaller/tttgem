@@ -11,14 +11,14 @@ describe TicTacToe::Board do
     end
   end
 
-  describe "#translate_board_to_string" do
+  describe "#translate_board_state_with_blanks" do
     it "makes the board representation a string" do
-      board.translate_board_state_to_string.should == '_________'  
+      board.translate_board_state_with_blanks.should == '_________'  
     end
 
     it "doesn't replace moves with spaces" do
       board.spaces[3] = "X"
-      board.translate_board_state_to_string.should == '___X_____'
+      board.translate_board_state_with_blanks.should == '___X_____'
     end
   end
 
@@ -127,6 +127,7 @@ describe TicTacToe::Board do
   end
 
   describe "getting and parsing a board" do
+
     it "parses the board" do
       board_parsed = 'X23456O89'
       board = described_class.parse(board_parsed)

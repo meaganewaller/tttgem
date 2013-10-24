@@ -4,7 +4,7 @@ describe TicTacToe::AIRules::UnbeatableAI do
   let(:mark) { 'O' }
 
   def test_board(board)
-    TicTacToe::Board.parse(board)
+    TicTacToe::Board.represent_board_state(board)
   end
 
   context "#minimax" do

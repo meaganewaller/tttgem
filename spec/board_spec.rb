@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe TicTacToe::Board do
   let(:board) {  described_class.new }
@@ -127,34 +126,32 @@ describe TicTacToe::Board do
     end
   end
 
-  describe "getting and parsing a board" do
-
-    it "parses the board" do
-      board_parsed = 'X23456O89'
-      board = described_class.parse(board_parsed)
-      board_parsed.split('').each_with_index do |mark, space|
-        board.get(space+1).should == mark
+  describe "getting and representing the board state" do
+    it "represents the board state" do
+      test_board_state = 'X23456O89'
+      test_board = described_class.represent_board_state(test_board_state)
+      test_board_state.split('').each_with_index do |mark, space|
+        test_board.get(space+1).should == mark
       end
-      board.spaces.should be_a(Array)
+      test_board.spaces.should be_a(Array)
     end
 
-    it "gets a board" do
-      board_parsed = '12345XX8O'
-      board = described_class.parse(board_parsed)
-      board.translate_board_with_indices.should == board_parsed
-      # binding.pry
+    it "gets a board and represents it's state" do
+      test_board_state = '12345XX8O'
+      test_board = described_class.represent_board_state(test_board_state)
+      test_board.translate_board_with_indices.should == test_board_state
     end
 
     it "gets a blank board" do
-      board_parsed = '_________'
-      board = described_class.parse(board_parsed)
-      board.translate_board_with_indices.should == "123456789"
+      test_board_state = '_________'
+      test_board = described_class.represent_board_state(test_board_state)
+      test_board.translate_board_with_indices.should == "123456789"
     end
 
     it "gets a board with underscores and some marks" do
-      board_parsed = '_X_______'
-      board = described_class.parse(board_parsed)
-      board.translate_board_with_indices.should == "1X3456789"
+      test_board_state = '_X_______'
+      test_board = described_class.represent_board_state(test_board_state)
+      test_board.translate_board_with_indices.should == "1X3456789"
     end
   end
 

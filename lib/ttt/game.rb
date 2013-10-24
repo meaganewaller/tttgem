@@ -46,7 +46,7 @@ module TicTacToe
     end
 
     def set_spaces(board)
-      @board = Board.parse(board)
+      @board = Board.represent_board_state(board)
     end
 
     def is_over?

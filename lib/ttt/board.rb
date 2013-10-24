@@ -57,10 +57,10 @@ module TicTacToe
       !@spaces.include?("X") && !@spaces.include?("O")
     end
 
-    def self.parse(board)
+    def self.represent_board_state(board_state)
       new_board_for_translation = self.new
       translated_board_spaces = []
-      new_spaces_for_translation = board.split('')
+      new_spaces_for_translation = board_state.split('')
       new_spaces_for_translation.each_index do |index|
         if new_spaces_for_translation[index] == '_' || new_spaces_for_translation[index].to_i != 0
           translated_board_spaces << (index + 1).to_s

@@ -31,6 +31,23 @@ module TicTacToe
       @board, @mark, @depth, @min, @max, @color = board, mark, depth, score_min, score_max, color
     end
 
+    def opponent_mark(mark)
+      mark == "X" ? "O" : "X"
+    end
+    
+    def minimax
+      return check_game_state(board, mark, depth) * color if game_done?(board, depth)
+
+      score_max = nil
+      board.empty_spaces.each do |space|
+        board.place_move(mark, space)
+        score_max = find_score(mark)
+        board.undo_move(space)
+        break if break_condition(score_max)
+      end
+      return score_max
+    end
+
     def check_game_state(board, mark, depth)
       return AIEngine::TIED_SCORE if board.tied_game?
       return AIEngine::MAX_SCORE + depth if board.winner == mark
@@ -47,40 +64,23 @@ module TicTacToe
   end
 
   class MinScore < Score
+    def break_condition(score_max)
+      min >= score_max
+    end
 
-    def minimax
-      opponent_mark = mark == "X" ? "O" : "X"
-
-      return check_game_state(board, mark, depth) * color if game_done?(board, depth)
-
-      score_max = nil
-      board.empty_spaces.each do |spaces|
-        board.place_move(mark, spaces)
-        score_max = [max, MaxScore.new(board, opponent_mark, depth + 1, min, max, -color).minimax].min
-        board.undo_move(spaces)
-        break if min >= score_max
-      end
-
-
-      return score_max
+    def find_score(mark)
+      [max, MaxScore.new(board, opponent_mark(mark), depth + 1, min, max, -color).minimax].min
     end
   end
 
   class MaxScore < Score
-
-    def minimax
-      opponent_mark = mark == "X" ? "O" : "X"
-
-      return check_game_state(board, mark, depth) * color if game_done?(board, depth)
-
-      score_min = nil
-      board.empty_spaces.each do |spaces|
-        board.place_move(mark, spaces)
-        score_min = [min, MinScore.new(board, opponent_mark, depth + 1, min, max, -color).minimax].max
-        board.undo_move(spaces)
-        break if score_min >= max
-      end
-      return score_min
+    def break_condition(score_min)
+      score_min >= max
     end
+
+    def find_score(mark)
+      [min, MinScore.new(board, opponent_mark(mark), depth + 1, min, max, -color).minimax].max
+    end
+
   end
 end

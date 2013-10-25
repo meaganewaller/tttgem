@@ -7,5 +7,6 @@ group :test do
   gem "pry"
   gem "cucumber"
   gem "rspec"
+  gem "debugger"
   gem "rake"
 end

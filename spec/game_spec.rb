@@ -98,12 +98,12 @@ describe TicTacToe::Game do
 
   context "#matches?" do
     it "doesnt match without marks" do
-      game.unique?([1,2, 5]).should be_false
+      game.board.is_solution_found?([1,2, 5]).should be_false
     end  
 
     it "matches with moves" do
       game.set_spaces('XXX456789')
-      game.unique?([1,2,3]).should be_true
+      game.board.is_solution_found?([1,2,3]).should be_true
     end
   end
 

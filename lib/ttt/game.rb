@@ -139,9 +139,5 @@ module TicTacToe
       return "tie" if tied_game?
       winner
     end
-
-    def unique?(spaces)
-      spaces.map { |space| @board.spaces[space-1]}.uniq.length == 1
-    end
   end
 end

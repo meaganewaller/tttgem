@@ -79,7 +79,7 @@ module TicTacToe
     def ask_move(player)
       user_input = @ui.ask_move(player)
       while 0 > user_input || user_input > 9
-        @ui.output.puts("Invalid Move, Try Again")
+        invalid_move_message
         user_input = @ui.ask_move(player)
       end
       user_input
@@ -97,6 +97,10 @@ module TicTacToe
           @ui.print_board(@board)
         end
       end
+    end
+
+    def invalid_move_message
+      @ui.output.puts("Invalid Move, Try Again")
     end
 
     def place_move(mark, move)

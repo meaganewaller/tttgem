@@ -9,24 +9,29 @@ module TicTacToe
       @over = over
     end
 
-    def self.play_game(ui, config, move="")
-      game = self.new(ui, config)
-      game.set_spaces(config[:game_board])
-      player = game.current_player(config[:game_board])
+    # making moves
+    def play_game(move="")
+      # initial setup
+      set_spaces(config[:game_board])
+      player = current_player(config[:game_board])
 
+      #if new board and first player isn't AI
       if game.board.is_board_empty? && player.class != AI
         game.ui.display_message
         game.ui.print_board(game.board)
         game.place_move(player.mark, move)
+        # game over 
       elsif game.is_over?
         game.ui.display_result(game.result)
         game.over = true
+        # any other move also does check for AI player 
       else
         game.ui.ask_move(player)
         move = game.get_move(player) if player.class == AI
         game.place_move(player.mark, move)
         game.ui.print_board(game.board)
 
+        # game over
         if game.is_over?
           game.ui.display_result(game.result)
           game.over = true
@@ -87,13 +92,11 @@ module TicTacToe
       moves[:player_one] = get_move(@player_one)
       if valid_move?(moves[:player_one])
         place_move(@player_one.mark, moves[:player_one])
-
         if !is_over?
           make_moves_not_over(moves={})
         end
       end
     end
-
 
     def make_moves_not_over(moves={})
       display_board_state if @player_two.class == Human
@@ -101,7 +104,6 @@ module TicTacToe
       place_move(@player_two.mark, moves[:player_two])
       display_board_state
     end
-
 
     def invalid_move_message
       @ui.output.puts("Invalid Move, Try Again")

@@ -89,13 +89,19 @@ module TicTacToe
         place_move(@player_one.mark, moves[:player_one])
 
         if !is_over?
-          @ui.print_board(@board) if @player_two.class == Human
-          moves[:player_two] = get_move(@player_two)
-          place_move(@player_two.mark, moves[:player_two])
-          @ui.print_board(@board)
+          make_moves_not_over(moves={})
         end
       end
     end
+
+
+    def make_moves_not_over(moves={})
+      display_board_state if @player_two.class == Human
+      moves[:player_two] = get_move(@player_two)
+      place_move(@player_two.mark, moves[:player_two])
+      display_board_state
+    end
+
 
     def invalid_move_message
       @ui.output.puts("Invalid Move, Try Again")
@@ -112,7 +118,7 @@ module TicTacToe
     end
 
     def end_of_game
-      @ui.print_board(@board)
+      display_board_state
       @ui.display_result(result)
       again?
     end

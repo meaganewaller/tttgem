@@ -35,8 +35,6 @@ module TicTacToe
       game
     end
 
-
-
     def game_config(config)
       @player_one = PlayerFactory.create(:type => config[:player_one].to_sym, :mark => "X")
       @player_two = PlayerFactory.create(:type => config[:player_two].to_sym, :mark => "O")
@@ -110,10 +108,10 @@ module TicTacToe
     def start
       display_board_state
       make_moves until is_over?
-      end_game
+      end_of_game
     end
 
-    def end_game
+    def end_of_game
       @ui.print_board(@board)
       @ui.display_result(result)
       again?
